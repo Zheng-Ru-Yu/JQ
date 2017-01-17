@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style :none;
+		}
+		body{
+			position: relative;
+		}
+		#container{
+			width: 520px;
+			height: 280px;
+			position: absolute;
+			left: 400px;
+			top: 100px;
+			/*margin: 100px auto;????*/
+		}
+		#tab{
+			
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+		}
+		#tab li,#arrows span{
+			float: left;
+			width: 20px;
+			height: 20px;
+			background-color: gray;
+			text-align: center;
+			line-height: 20px;
+			margin: 3px;
+			cursor: pointer;
+			color: white;
+		}
+		#arrows{
+			position: absolute;
+			left:10px;
+			bottom: 10px;
+		}
+		#images img{
+			display: none;
+		}
+		#images .show{
+			display: block;
+		}
+		#tab .first{
+			background-color: yellow;
+		}
+
+	
+	</style>
+</head>
+
+
+<body>
+
+	<div id="container">
+		<div id="images">
+			<img class="show" src="img/1.jpg">
+			<img src="img/2.jpg">
+			<img src="img/3.jpg">
+			<img src="img/4.jpg">
+		</div>
+		<ul id="tab">
+			<li class="first">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<div id="arrows">
+			<span id="prev">&lt</span>
+			<span id="next">&gt</span>
+		</div>
+
+	</div>
+	
+	<script src="jquery-1.12.4.min.js"></script>
+
+	<script type="text/javascript">
+		$(function (){
+				var nowIdx = 0;
+
+			$('#tab li').on('click',function(){
+				$(this).addClass('first').siblings().removeClass('first');
+				nowIdx = $(this).index();
+				$('#images img:eq('+nowIdx+')').addClass('show').siblings().removeClass('show');
+
+			});
+			$('#prev').on('click',function(){
+				nowIdx--;
+					if (nowIdx == -1) {
+						nowIdx =3;
+					}
+			$('#tab li:eq('+nowIdx+')').addClass('first').siblings().removeClass('first');
+				// var index = $(this).index();
+				$('#images img:eq('+nowIdx+')').addClass('show').siblings().removeClass('show');
+
+			});
+
+			$('#next').on('click',function(){
+				
+				nowIdx++;
+				if (nowIdx == 4) {
+					nowIdx = 0;
+				}
+			
+			$('#tab li:eq('+nowIdx+')').addClass('first').siblings().removeClass('first');
+				// var index = $(this).index();
+				$('#images img:eq('+nowIdx+')').addClass('show').siblings().removeClass('show');
+
+			});
+			var timer = setInterval(function(){
+				$('#next').trigger('click');
+			},1000);
+			$('#container').on('mouseover',function(){
+				clearInterval(timer);
+			});
+			$('#container').on('mouseout',function(){
+				clearInterval(timer) 
+				timer = setInterval(function(){
+					$('#next').trigger('click');	
+				}, 1000);
+			});
+			
+			
+
+		});
+	</script>
+
+</body>
+</html>

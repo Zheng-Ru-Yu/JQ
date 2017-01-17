@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			float: left;
+			height: 20px;
+			width: 70px;
+			border-bottom:1px solid #000;
+			border-right:1px solid #000;
+			text-align: center;
+			line-height: 20px;
+			cursor: pointer;
+		}
+		#container{
+			
+			border:1px solid #000;
+			height: 200px;
+			width: 220px;
+			margin: 0 auto;
+			overflow: hidden;
+			
+		}
+		#content{
+			clear: both;
+		}
+		#content div{
+			height: 180px;
+			width: 220px;
+			display: none;
+			
+		}
+		.first{
+			background-color: gray;
+		}
+		#content .selected{
+			display: block;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="container">
+		<ul id="tab">
+			<li class="first">html</li>
+			<li>css</li>
+			<li>javascript</li>
+		</ul>
+		<div id="content">
+			<div class="selected">111</div>
+			<div>222</div>
+			<div>333</div>
+		</div>
+
+	</div>
+	<script src='jquery-1.12.4.min.js'></script>
+	<script>
+		$(function (){
+			$('#tab li').on('click',function(){
+				$(this).addClass('first').siblings().removeClass('first');
+				var index = $(this).index();
+				$('#content div:eq('+index+')').addClass('selected').siblings().removeClass('selected');
+
+			});
+			// body...
+		});
+				
+			
+	</script>
+</body>
+</html>`

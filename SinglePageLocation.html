@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    div {
+        height: 500px;
+    }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#div1">div1</a></li>
+        <li><a href="#div2">div2</a></li>
+        <li><a href="#div3">div3</a></li>
+    </ul>
+    <div id="div1" style="background:blue">blue</div>
+    <div id="div2" style="background:red">red</div>
+    <div id="div3" style="background:yellow">yellow</div>
+	<script type="text/javascript" src="jquery-1.12.4.min.js"></script>
+    <script>
+    $(function(){
+       
+    	$('a').on("click",function(){
+    		var href = $(this).attr('href');//其实取到的是链接所对应的div
+			$(document.body).animate({
+			scrollTop:$(href).offset().top
+			},500);
+            history.pushState($(href).offset().top, '');
+            return false;//取消矛点的作用
+            
+    	});
+        window.onpopstate=function(e){
+            $(document.body).animate({
+                scrollTop : e.state
+            },500);
+        };
+
+
+    });
+    
+   
+    </script>
+</body>
+
+</html>
